@@ -4,7 +4,7 @@ export const WhyAgrifolio = () => {
     title,
     description,
   }: {
-    icon?: any;
+    icon?: string;
     title?: string;
     description?: string;
   }) => {

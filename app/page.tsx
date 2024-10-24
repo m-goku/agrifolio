@@ -1,6 +1,5 @@
 import FeatureCard from "./components/FeatureCard";
 import Hero from "./components/Hero";
-import PreviewCard from "./components/PreviewCard";
 import { WhyAgrifolio } from "./components/WhyAgrifolio";
 
 export default function Home() {
