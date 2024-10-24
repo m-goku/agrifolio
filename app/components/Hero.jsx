@@ -11,14 +11,16 @@ function Hero() {
         />
         <div className="lg:pl-6">
           <h1 className="text-4xl font-bold">
-            Personalized Portfolio Profiles for Your Agribusiness
+            Modern Portfolio for Your Agribusiness
           </h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <button className="btn btn-primary bg-slate-700 text-white hover:bg-slate-800 hover:text-white border-slate-600">
+            Get Started
+          </button>
         </div>
       </div>
     </div>

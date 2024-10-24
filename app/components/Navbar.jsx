@@ -30,7 +30,13 @@ const Navbar = () => {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          Menu
+          <div className="justify-center items-center">
+            <img
+              src={"https://cdn-icons-png.flaticon.com/128/7216/7216128.png"}
+              alt="icon"
+              className="size-10"
+            />
+          </div>
         </button>
       </div>
 
@@ -40,7 +46,9 @@ const Navbar = () => {
           Login
         </Link>
         <Link href="/">
-          <button className="btn btn-active btn-primary btn-sm">Sign Up</button>
+          <button className="btn btn-active btn-primary btn-sm bg-slate-700 text-white hover:bg-slate-800 hover:text-white mr-5">
+            Sign Up
+          </button>
         </Link>
       </div>
 
