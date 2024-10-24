@@ -7,7 +7,7 @@ export default function Home() {
     <div className="bg-white">
       <Hero />
       <div className="flex flex-col md:flex-row md:justify-center md:space-x-4 p-4 bg-slate-50">
-        <div className="flex-grow md:w-3/3">
+        <div className="flex-grow md:w-1/3">
           <FeatureCard
             icon="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
             title="Create Your Profile"
