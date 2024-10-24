@@ -10,10 +10,10 @@ function Hero() {
           alt="Hero"
         />
         <div className="lg:pl-6">
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-4xl font-bold text-slate-800">
             Modern Portfolio for Your Agribusiness
           </h1>
-          <p className="py-6">
+          <p className="py-6 text-slate-600">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.

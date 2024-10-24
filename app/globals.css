@@ -32,7 +32,5 @@ body {
     @apply font-sans;
     /* Apply the Poppins font globally */
   }
-  html {
-    color-scheme: light !important;
-  }
+  
 }

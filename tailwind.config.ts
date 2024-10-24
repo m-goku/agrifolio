@@ -7,7 +7,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
+ 
   theme: {
     extend: {
         fontFamily: {
@@ -20,7 +20,7 @@ const config: Config = {
     },
   },
   daisyui : {
-   themes : false
+   themes : []
   },
   plugins: [
     daisyui

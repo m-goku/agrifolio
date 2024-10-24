@@ -15,7 +15,7 @@ export const WhyAgrifolio = () => {
         </div>
         {/* Replace with actual icon */}
         <div>
-          <h4 className="text-lg font-bold text-gray700">{title}</h4>
+          <h4 className="text-lg font-bold text-gray-700">{title}</h4>
           <p className="text-gray-600">{description}</p>
         </div>
       </div>

@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-base-100">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost text-xl">
+        <Link href="/" className="btn btn-ghost text-xl text-slate-800">
           My AgriFolio
         </Link>
       </div>
@@ -42,7 +42,7 @@ const Navbar = () => {
 
       {/* Inline menu links for desktop */}
       <div className="hidden lg:flex">
-        <Link href="/" className="mr-5">
+        <Link href="/" className="mr-5 text-slate-800">
           Login
         </Link>
         <Link href="/">
