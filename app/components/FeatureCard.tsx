@@ -11,7 +11,7 @@ const FeatureCard = ({
 }) => {
   return (
     <div className="p-5 flex justify-center">
-      <div className="card bg-base-100 w-full max-w-xs shadow-xl">
+      <div className="card bg-base-100 w-full max-w-xs shadow-xl  bg-white">
         <figure className="px-10 pt-10">
           <img src={icon} alt="icon" className="rounded-xl size-10 " />
         </figure>

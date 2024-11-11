@@ -12,12 +12,13 @@ function Hero() {
         />
         <div className="lg:pl-6">
           <h1 className="text-4xl font-bold text-slate-800">
-            Modern Portfolio for Your Agribusiness
+            Modern Portfolio for You and Your Agribusiness
           </h1>
           <p className="py-6 text-slate-600">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            Create a powerful online presence with customizable profiles,
+            connect with consumers and partners globally, and drive growth for
+            your agribusiness—all on a platform designed to elevate your brand
+            and streamline your operations.
           </p>
           <Link href="/auth/sign-up">
             <button className="btn btn-primary bg-slate-700 text-white hover:bg-slate-800 hover:text-white border-slate-600">

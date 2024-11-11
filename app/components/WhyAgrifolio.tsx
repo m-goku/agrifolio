@@ -39,12 +39,12 @@ export const WhyAgrifolio = () => {
           <FeatureCard2
             icon={"https://cdn-icons-png.flaticon.com/128/2285/2285559.png"}
             title="Elevate Your Brand"
-            description="Create a detailed profile to showcase your products, practices, and story. Stand out in the crowded market with stunning visuals and a compelling narrative."
+            description="Create a unique, professional online profile for your agribusiness. Showcase your products, farming practices, and business story with customizable layouts, multimedia content, and branding options that reflect your identity and values."
           />
           <FeatureCard2
             icon={"https://cdn-icons-png.flaticon.com/128/4207/4207230.png"}
             title="Expand Your Market"
-            description="Connect with local and global buyers, partners, and distributors. Grow your business by reaching new customers and accessing broader markets."
+            description="Connect with consumers, buyers, and partners from around the world. Our platform makes it easy to expand your market reach, forge new partnerships, and engage directly with a global audience interested in your products and practices."
           />
           <FeatureCard2
             icon={"https://cdn-icons-png.flaticon.com/128/565/565504.png"}
