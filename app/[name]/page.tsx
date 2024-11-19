@@ -21,39 +21,39 @@ const Card = ({ params }: { params: { name: string } }) => {
     const [error, setError] = useState<string | null>(null);
     const [foundProfile, setFoundProfile] = useState<boolean>(false);
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
 
-                const response = await fetch(`http://192.168.43.186:3001/post/${params.name}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
+    //             const response = await fetch(`http://192.168.43.186:3001/post/${params.name}`, {
+    //                 method: "GET",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //             });
 
-                if (response.status === 404) {
-                    setFoundProfile(false)
-                    return
-                }
+    //             if (response.status === 404) {
+    //                 setFoundProfile(false)
+    //                 return
+    //             }
 
-                if (!response.ok) {
-                    setFoundProfile(false)
-                    return
-                }
+    //             if (!response.ok) {
+    //                 setFoundProfile(false)
+    //                 return
+    //             }
 
-                const result = await response.json();
-                setProfile(result);
-                setFoundProfile(true);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'An unknown error occurred');
-            } finally {
-                setLoading(false);
-            }
-        };
+    //             const result = await response.json();
+    //             setProfile(result);
+    //             setFoundProfile(true);
+    //         } catch (err) {
+    //             setError(err instanceof Error ? err.message : 'An unknown error occurred');
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        getData();
-    }, [params.name]); // re-fetch when the id in the params changes
+    //     getData();
+    // }, [params.name]); // re-fetch when the id in the params changes
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
