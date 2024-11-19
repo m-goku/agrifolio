@@ -23,6 +23,14 @@ const sustainabilityOptions = [
   { value: "organic_farming", label: "Organic Farming" },
 ];
 
+const valuesOptions = [
+  { value: "technological_excellence", label: "Technological excellence" },
+  { value: "sustainable_innovation", label: "Sustainable innovation" },
+  { value: "farmer_first", label: "Farmer-first approach" },
+  { value: "environmental_stewardship", label: "Environmental stewardship" },
+];
+
+
 const expertiseOptions = [
   { value: "value_chain", label: "Value Chain" },
   { value: "problem_solving", label: "Problem Solving" },
@@ -36,10 +44,14 @@ const AgribusinessForm = () => {
   const formik = useFormik({
     initialValues: {
       history: "",
-      values: "",
+      valuesOptions: [],
+      valuesDetails: "",
       agribusinessType: [],
+      businessTypesDetails: "",
       sustainability: [],
+      sustainabilityDetails: "",
       expertise: [],
+      expertiseDetails: "",
       country: "",
       region: "",
       city: "",
@@ -49,20 +61,18 @@ const AgribusinessForm = () => {
       serviceAreas: "",
     },
     validationSchema: Yup.object({
-      agribusinessType: Yup.string().required(
-        "Type of Agribusiness is required"
-      ),
-      email: Yup.string()
-        .email("Invalid email format")
-        .required("Email is required"),
-      businessNumber: Yup.string().required("Business number is required"),
-      phoneNumber: Yup.string().required("Phone number is required"),
-      country: Yup.string().required("Country is required"),
-      region: Yup.string().required("Region is required"),
-      city: Yup.string().required("City is required"),
+      // email: Yup.string()
+      //   .email("Invalid email format")
+      //   .required("Email is required"),
+      // businessNumber: Yup.string().required("Business number is required"),
+      // phoneNumber: Yup.string().required("Phone number is required"),
+      // country: Yup.string().required("Country is required"),
+      // region: Yup.string().required("Region is required"),
+      // city: Yup.string().required("City is required"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log(values)
+      //alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -87,28 +97,19 @@ const AgribusinessForm = () => {
         />
       </div>
 
-      {/* <div className="mb-4">
+      {/* Agribusiness  Details*/}
+      <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">
-          Type of Agribusiness
+          What is your business about?
         </label>
-        <select
-          id="agribusinessType"
-          {...formik.getFieldProps("agribusinessType")}
+        <textarea
+          rows={2}
+          id="businessTypesDetails"
+          {...formik.getFieldProps("businessTypesDetails")}
           className="w-full border border-gray-300 rounded-md p-2"
-        >
-          <option value="">Select Type</option>
-          {agribusinessOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        {formik.touched.agribusinessType && formik.errors.agribusinessType ? (
-          <div className="text-red-500 text-sm">
-            {formik.errors.agribusinessType}
-          </div>
-        ) : null}
-      </div> */}
+          placeholder="Write about your bsiness..."
+        />
+      </div>
 
       {/* History and Mission */}
       <div className="mb-4">
@@ -124,15 +125,28 @@ const AgribusinessForm = () => {
         />
       </div>
 
-      {/* Values */}
+      {/* Values Options */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">
           Values
         </label>
+        <MultiSelect
+          options={valuesOptions}
+          value={formik.values.valuesOptions}
+          onChange={(value) => formik.setFieldValue("valuesOptions", value)}
+          placeholder="Select Values"
+        />
+      </div>
+
+      {/* Values */}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          What are your business values?
+        </label>
         <textarea
           rows={2}
-          id="values"
-          {...formik.getFieldProps("values")}
+          id="valuesDetails"
+          {...formik.getFieldProps("valuesDetails")}
           className="w-full border border-gray-300 rounded-md p-2"
           placeholder="Enter values"
         />
@@ -151,6 +165,20 @@ const AgribusinessForm = () => {
         />
       </div>
 
+      {/* Sustainability  Details*/}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          What sustainability practices do you implement?
+        </label>
+        <textarea
+          rows={2}
+          id="sustainabilityDetails"
+          {...formik.getFieldProps("sustainabilityDetails")}
+          className="w-full border border-gray-300 rounded-md p-2"
+          placeholder="Write about your implemented practices..."
+        />
+      </div>
+
       {/* Agricultural Expertise */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">
@@ -161,6 +189,20 @@ const AgribusinessForm = () => {
           value={formik.values.expertise}
           onChange={(value) => formik.setFieldValue("expertise", value)}
           placeholder="Select expertise areas"
+        />
+      </div>
+
+      {/* Agricultural Expertise  Details*/}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          What agricultural expertise do you have?
+        </label>
+        <textarea
+          rows={2}
+          id="expertiseDetails"
+          {...formik.getFieldProps("expertiseDetails")}
+          className="w-full border border-gray-300 rounded-md p-2"
+          placeholder="Write about your expertise..."
         />
       </div>
 
@@ -251,9 +293,10 @@ const AgribusinessForm = () => {
 
       <button
         type="submit"
+        //disabled={!formik.isValid || formik.isSubmitting}
         className="w-full py-3 font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-md"
       >
-        Next
+        Submit
       </button>
     </form>
   );

@@ -4,11 +4,15 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { useRouter } from 'next/navigation'
 const Signup = () => {
+
+  const router = useRouter()
+
   // Validation schema for business form
   const businessValidationSchema = Yup.object({
     businessName: Yup.string().required("Required"),
-    businessEmail: Yup.string()
+    email: Yup.string()
       .email("Invalid email address")
       .required("Required"),
     password: Yup.string()
@@ -26,17 +30,36 @@ const Signup = () => {
       password: "",
       confirmPassword: "",
       businessName: "",
-      businessEmail: "",
     },
     validationSchema: businessValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("Business Signup:", values);
+
+      const response = await fetch('http://192.168.0.129:3001/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+          businessName: values.businessName
+        }),
+      });
+
+
+      const result = await response.json();
+
+      if (result.status === "SUCCESS") {
+        router.push('/user/who-we-are')
+      }
+      console.log(result);
     },
   });
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row  bg-slate-50">
-      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col w-full lg:flex-row lg:shadow-lg">
+      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col w-full lg:flex-row lg:shadow-lg mt-20">
         {/* Left Section - Image Background (hidden on mobile) */}
         <div
           className="hidden lg:block lg:w-1/2 bg-cover bg-center"
@@ -67,11 +90,10 @@ const Signup = () => {
                   type="text"
                   id="businessName"
                   {...formik.getFieldProps("businessName")}
-                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${
-                    formik.touched.businessName && formik.errors.businessName
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } focus:ring-blue-500 focus:border-blue-500`}
+                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${formik.touched.businessName && formik.errors.businessName
+                    ? "border-red-500"
+                    : "border-gray-300"
+                    } focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Your business name"
                 />
                 {formik.touched.businessName && formik.errors.businessName ? (
@@ -83,25 +105,24 @@ const Signup = () => {
 
               <div className="mb-4">
                 <label
-                  htmlFor="businessEmail"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Business Email
                 </label>
                 <input
                   type="email"
-                  id="businessEmail"
-                  {...formik.getFieldProps("businessEmail")}
-                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${
-                    formik.touched.businessEmail && formik.errors.businessEmail
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } focus:ring-blue-500 focus:border-blue-500`}
+                  id="email"
+                  {...formik.getFieldProps("email")}
+                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${formik.touched.email && formik.errors.email
+                    ? "border-red-500"
+                    : "border-gray-300"
+                    } focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="business@example.com"
                 />
-                {formik.touched.businessEmail && formik.errors.businessEmail ? (
+                {formik.touched.email && formik.errors.email ? (
                   <p className="text-red-500 text-sm">
-                    {formik.errors.businessEmail}
+                    {formik.errors.email}
                   </p>
                 ) : null}
               </div>
@@ -117,11 +138,10 @@ const Signup = () => {
                   type="password"
                   id="password"
                   {...formik.getFieldProps("password")}
-                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${
-                    formik.touched.password && formik.errors.password
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } focus:ring-blue-500 focus:border-blue-500`}
+                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${formik.touched.password && formik.errors.password
+                    ? "border-red-500"
+                    : "border-gray-300"
+                    } focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Create your password"
                 />
                 {formik.touched.password && formik.errors.password ? (
@@ -142,16 +162,15 @@ const Signup = () => {
                   type="password"
                   id="confirmPassword"
                   {...formik.getFieldProps("confirmPassword")}
-                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${
-                    formik.touched.confirmPassword &&
+                  className={`mt-1 block w-full px-4 py-2 border rounded-md shadow-sm ${formik.touched.confirmPassword &&
                     formik.errors.confirmPassword
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } focus:ring-blue-500 focus:border-blue-500`}
+                    ? "border-red-500"
+                    : "border-gray-300"
+                    } focus:ring-blue-500 focus:border-blue-500`}
                   placeholder="Confirm your password"
                 />
                 {formik.touched.confirmPassword &&
-                formik.errors.confirmPassword ? (
+                  formik.errors.confirmPassword ? (
                   <p className="text-red-500 text-sm">
                     {formik.errors.confirmPassword}
                   </p>

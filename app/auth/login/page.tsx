@@ -1,10 +1,12 @@
 "use client";
 
 // pages/login.js
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+
+import { useRouter } from 'next/navigation'
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -15,6 +17,10 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
+
+  const router = useRouter()
+
+
   // Formik setup
   const formik = useFormik({
     initialValues: {
@@ -22,16 +28,34 @@ const Login = () => {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+
       // Handle form submission, e.g., authenticate the user
       console.log(values);
+
+      const response = await fetch('http://192.168.0.129:3001/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.status === "SUCCESS") {
+        router.push('/user/dashboard')
+      }
+      console.log(result);
       // You might want to call your login API here
     },
   });
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-slate-50">
-      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col w-full lg:flex-row lg:shadow-lg">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-slate-50 ">
+      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col w-full lg:flex-row lg:shadow-lg mt-20">
         {/* Left Section - Image Background */}
         <div
           className="hidden lg:block lg:w-1/2 bg-cover bg-center"
@@ -59,11 +83,10 @@ const Login = () => {
                   type="email"
                   id="email"
                   {...formik.getFieldProps("email")}
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none ${
-                    formik.touched.email && formik.errors.email
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } focus:ring focus:ring-blue-500`}
+                  className={`mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none ${formik.touched.email && formik.errors.email
+                    ? "border-red-500"
+                    : "border-gray-300"
+                    } focus:ring focus:ring-blue-500`}
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <div className="text-red-500 text-sm">
@@ -82,11 +105,10 @@ const Login = () => {
                   type="password"
                   id="password"
                   {...formik.getFieldProps("password")}
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none ${
-                    formik.touched.password && formik.errors.password
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } focus:ring focus:ring-blue-500`}
+                  className={`mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none ${formik.touched.password && formik.errors.password
+                    ? "border-red-500"
+                    : "border-gray-300"
+                    } focus:ring focus:ring-blue-500`}
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <div className="text-red-500 text-sm">
@@ -94,14 +116,14 @@ const Login = () => {
                   </div>
                 ) : null}
               </div>
-              <Link href={"/profile/who-we-are"}>
-                <button
-                  type="submit"
-                  className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
-                >
-                  Login
-                </button>
-              </Link>
+
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+              >
+                Login
+              </button>
+
             </form>
             <div className="mt-4 text-center">
               <Link
