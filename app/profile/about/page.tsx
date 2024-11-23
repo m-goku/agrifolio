@@ -52,20 +52,13 @@ const AgribusinessForm = () => {
       sustainabilityDetails: "",
       expertise: [],
       expertiseDetails: "",
-      country: "",
-      region: "",
-      city: "",
-      email: "",
-      businessNumber: "",
-      phoneNumber: "",
-      serviceAreas: "",
     },
     validationSchema: Yup.object({
       // email: Yup.string()
       //   .email("Invalid email format")
       //   .required("Email is required"),
       // businessNumber: Yup.string().required("Business number is required"),
-      // phoneNumber: Yup.string().required("Phone number is required"),
+      // phone: Yup.string().required("Phone number is required"),
       // country: Yup.string().required("Country is required"),
       // region: Yup.string().required("Region is required"),
       // city: Yup.string().required("City is required"),
@@ -79,7 +72,7 @@ const AgribusinessForm = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="p-6 max-w-3xl mx-auto bg-white shadow-md rounded-md"
+      className="p-6 max-w-3xl mx-auto bg-white"
     >
       <h1 className="text-2xl font-bold mb-8">About Your Agribusiness</h1>
 
@@ -205,98 +198,12 @@ const AgribusinessForm = () => {
           placeholder="Write about your expertise..."
         />
       </div>
-
-      {/* Location Information */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Location Information
-        </label>
-        <input
-          type="text"
-          id="country"
-          placeholder="Country"
-          {...formik.getFieldProps("country")}
-          className="w-full border border-gray-300 rounded-md p-2 mt-2"
-        />
-        {formik.touched.country && formik.errors.country ? (
-          <div className="text-red-500 text-sm">{formik.errors.country}</div>
-        ) : null}
-        <input
-          type="text"
-          id="region"
-          placeholder="Region"
-          {...formik.getFieldProps("region")}
-          className="w-full border border-gray-300 rounded-md p-2 mt-2"
-        />
-        {formik.touched.region && formik.errors.region ? (
-          <div className="text-red-500 text-sm">{formik.errors.region}</div>
-        ) : null}
-        <input
-          type="text"
-          id="city"
-          placeholder="City"
-          {...formik.getFieldProps("city")}
-          className="w-full border border-gray-300 rounded-md p-2 mt-2"
-        />
-        {formik.touched.city && formik.errors.city ? (
-          <div className="text-red-500 text-sm">{formik.errors.city}</div>
-        ) : null}
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          {...formik.getFieldProps("email")}
-          className="w-full border border-gray-300 rounded-md p-2 mt-2"
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <div className="text-red-500 text-sm">{formik.errors.email}</div>
-        ) : null}
-        <input
-          type="text"
-          id="businessNumber"
-          placeholder="Business Number"
-          {...formik.getFieldProps("businessNumber")}
-          className="w-full border border-gray-300 rounded-md p-2 mt-2"
-        />
-        {formik.touched.businessNumber && formik.errors.businessNumber ? (
-          <div className="text-red-500 text-sm">
-            {formik.errors.businessNumber}
-          </div>
-        ) : null}
-        <input
-          type="text"
-          id="phoneNumber"
-          placeholder="Phone Number"
-          {...formik.getFieldProps("phoneNumber")}
-          className="w-full border border-gray-300 rounded-md p-2 mt-2"
-        />
-        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-          <div className="text-red-500 text-sm">
-            {formik.errors.phoneNumber}
-          </div>
-        ) : null}
-      </div>
-
-      {/* Service Areas */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Service Areas (seperate with commas)
-        </label>
-        <textarea
-          rows={2}
-          id="serviceAreas"
-          {...formik.getFieldProps("serviceAreas")}
-          className="w-full border border-gray-300 rounded-md p-2"
-          placeholder="Enter service areas"
-        />
-      </div>
-
       <button
         type="submit"
         //disabled={!formik.isValid || formik.isSubmitting}
         className="w-full py-3 font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-md"
       >
-        Submit
+        Next →
       </button>
     </form>
   );

@@ -3,7 +3,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="hero bg-base-200 pt-10 pb-10 flex items-center bg-slate-50">
+    <div className=" pt-10 pb-10 flex items-cente">
       <div className="hero-content text-center flex-col lg:flex-row-reverse">
         <img
           src="https://images.pexels.com/photos/841303/pexels-photo-841303.jpeg"
@@ -20,11 +20,18 @@ function Hero() {
             your agribusiness—all on a platform designed to elevate your brand
             and streamline your operations.
           </p>
-          <Link href="/auth/sign-up">
-            <button className="btn btn-primary bg-slate-700 text-white hover:bg-slate-800 hover:text-white border-slate-600">
-              Get Started
-            </button>
-          </Link>
+          <div className="space-x-4">
+            <Link href="/auth/sign-up">
+              <button className="btn btn-primary bg-slate-700 text-white hover:bg-slate-800 hover:text-white border-slate-600">
+                Get Started
+              </button>
+            </Link>
+            <Link href="/EcoFarmersCollective">
+              <button className="btn btn-primary bg-slate-700 text-white hover:bg-slate-800 hover:text-white border-slate-600">
+                View Demo
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

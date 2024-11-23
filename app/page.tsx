@@ -1,12 +1,15 @@
 import FeatureCard from "./components/FeatureCard";
+import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
 import { WhyAgrifolio } from "./components/WhyAgrifolio";
 
 export default function Home() {
   return (
-    <div className="bg-white">
+    <div className="bg-white items-center flex flex-col">
+      <Navbar />
       <Hero />
-      <div className="flex flex-col md:flex-row md:justify-center md:space-x-4 p-4 bg-slate-50">
+      <div className="flex flex-col md:flex-row md:justify-center md:space-x-4 p-4">
         <div className="flex-grow md:w-1/3">
           <FeatureCard
             icon="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
@@ -29,9 +32,10 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="flex flex-col bg-slate-50 md:justify-center md:space-x-4 p-4">
+      <div className="flex flex-col md:justify-center md:space-x-4 p-4">
         <WhyAgrifolio />
       </div>
+      <Footer />
     </div>
   );
 }

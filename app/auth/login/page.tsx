@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import Link from "next/link";
 
 import { useRouter } from 'next/navigation'
+import Toast from "@/app/components/Toast";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -18,7 +19,25 @@ const validationSchema = Yup.object({
 
 const Login = () => {
 
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
+
+  type ToastState = {
+    message: string;
+    type: "success" | "error" | "info" | "warning";
+  } | null;
+
+
+  const [toast, setToast] = useState<ToastState>(null);
+
+  const showToast = (message: string, type: "success" | "error" | "info" | "warning") => {
+    setToast({ message, type });
+
+    // Clear the toast after it's closed
+    setTimeout(() => {
+      setToast(null);
+    }, 5000);
+  };
 
 
   // Formik setup
@@ -29,7 +48,7 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-
+      setLoading(true)
       // Handle form submission, e.g., authenticate the user
       console.log(values);
 
@@ -45,7 +64,14 @@ const Login = () => {
       });
 
       const result = await response.json();
+
+      if (response.status === 404) {
+        setLoading(false)
+        showToast(result.message, "error")
+      }
+
       if (result.status === "SUCCESS") {
+        //setLoading(false)
         router.push('/user/dashboard')
       }
       console.log(result);
@@ -118,10 +144,11 @@ const Login = () => {
               </div>
 
               <button
+                disabled={loading ? true : false}
                 type="submit"
-                className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+                className={`w-full py-2 px-4 text-white font-semibold rounded-md transition duration-200 ${loading ? "bg-blue-400" : "bg-blue-600  hover:bg-blue-700"}`}
               >
-                Login
+                {loading ? <p>Logging in</p> : <p>Login</p>}
               </button>
 
             </form>
@@ -136,6 +163,14 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };

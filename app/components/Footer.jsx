@@ -5,7 +5,7 @@ const Footer = () => {
     <div>
       <footer className="footer footer-center bg-base-300 text-base-content p-4">
         <aside>
-          <p>Copyright © {new Date().getFullYear()} - My Afrifolio</p>
+          <p>Copyright © {new Date().getFullYear()} - Powered by My Afrifolio</p>
         </aside>
       </footer>
     </div>

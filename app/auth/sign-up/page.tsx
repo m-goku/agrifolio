@@ -5,9 +5,30 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { useRouter } from 'next/navigation'
+import Toast from "@/app/components/Toast";
 const Signup = () => {
 
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
+
+  type ToastState = {
+    message: string;
+    type: "success" | "error" | "info" | "warning";
+  } | null;
+
+
+  const [toast, setToast] = useState<ToastState>(null);
+
+  const showToast = (message: string, type: "success" | "error" | "info" | "warning") => {
+    setToast({ message, type });
+
+    // Clear the toast after it's closed
+    setTimeout(() => {
+      setToast(null);
+    }, 5000);
+  };
+
+
 
   // Validation schema for business form
   const businessValidationSchema = Yup.object({
@@ -34,7 +55,7 @@ const Signup = () => {
     validationSchema: businessValidationSchema,
     onSubmit: async (values) => {
       console.log("Business Signup:", values);
-
+      setLoading(true)
       const response = await fetch('http://192.168.0.129:3001/auth/register', {
         method: 'POST',
         headers: {
@@ -47,13 +68,22 @@ const Signup = () => {
         }),
       });
 
-
       const result = await response.json();
 
-      if (result.status === "SUCCESS") {
-        router.push('/user/who-we-are')
+      if (response.status === 409) {
+        setLoading(false)
+        showToast(result.message, "error")
       }
-      console.log(result);
+
+      if (response.status === 500) {
+        setLoading(false)
+        showToast(result.message, "error")
+      }
+
+      if (result.status === "SUCCESS") {
+        showToast(result.status, "success")
+        router.push('/profile/who-we-are')
+      }
     },
   });
 
@@ -179,6 +209,7 @@ const Signup = () => {
             </>
 
             <button
+              disabled={loading ? true : false}
               type="submit"
               className="w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
@@ -195,6 +226,14 @@ const Signup = () => {
           </p>
         </div>
       </div>
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };
