@@ -1,11 +1,9 @@
-// components/ImageUpload.tsx
 'use client';
 
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { UploadCloud, X, Image as ImageIcon } from 'lucide-react';
 import Image from 'next/image';
-
 
 export interface UploadedImage {
     public_id: string;
@@ -22,7 +20,6 @@ export interface ImageUploadResponse {
     data?: UploadedImage;
 }
 
-
 interface ImageUploadProps {
     onUploadSuccess?: (image: UploadedImage) => void;
     onUploadError?: (error: string) => void;
@@ -36,21 +33,30 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 }) => {
     const [uploading, setUploading] = useState(false);
     const [preview, setPreview] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [uploadError, setUploadError] = useState<string | null>(null);
 
-    const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    const onDrop = useCallback((acceptedFiles: File[]) => {
         const file = acceptedFiles[0];
         if (!file) return;
 
         // Create preview
         const previewUrl = URL.createObjectURL(file);
         setPreview(previewUrl);
+        setSelectedFile(file);
         setUploadError(null);
-        setUploading(true);
+    }, []);
 
+    const handleUpload = async () => {
+        if (!selectedFile) {
+            setUploadError('No file selected.');
+            return;
+        }
+
+        setUploading(true);
         try {
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', selectedFile);
 
             const response = await fetch('/api/upload', {
                 method: 'POST',
@@ -64,31 +70,29 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             }
 
             onUploadSuccess?.(data.data);
-            setUploading(false);
+            setPreview(null);
+            setSelectedFile(null);
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Upload failed';
             setUploadError(errorMessage);
             onUploadError?.(errorMessage);
+        } finally {
             setUploading(false);
-            // Clean up preview after error
-            setTimeout(() => {
-                setPreview(null);
-                setUploadError(null);
-            }, 3000);
         }
-    }, [onUploadSuccess, onUploadError]);
+    };
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         maxSize,
         accept: {
-            'image/*': ['.jpg', '.jpeg', '.png', '.gif']
+            'image/*': ['.jpg', '.jpeg', '.png', '.gif'],
         },
         multiple: false,
     });
 
     const clearPreview = () => {
         setPreview(null);
+        setSelectedFile(null);
         setUploadError(null);
     };
 
@@ -97,10 +101,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             <div
                 {...getRootProps()}
                 className={`relative border-2 border-dashed rounded-lg p-6 transition-colors
-          ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
-          ${uploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-blue-400'}
-          ${uploadError ? 'border-red-500 bg-red-50' : ''}
-        `}
+                ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}
+                ${uploadError ? 'border-red-500 bg-red-50' : ''}
+            `}
             >
                 <input {...getInputProps()} disabled={uploading} />
 
@@ -147,16 +150,20 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                         )}
                     </div>
                 )}
-
-                {uploading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 rounded-lg">
-                        <div className="flex flex-col items-center">
-                            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                            <p className="mt-2 text-sm text-gray-600">Uploading...</p>
-                        </div>
-                    </div>
-                )}
             </div>
+
+            {preview && (
+                <div className="mt-4 flex justify-between items-center">
+
+                    <button
+                        onClick={handleUpload}
+                        className="btn bg-blue-600 text-white hover:bg-blue-700 w-full"
+                        disabled={uploading}
+                    >
+                        {uploading ? 'Uploading...' : 'Upload'}
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

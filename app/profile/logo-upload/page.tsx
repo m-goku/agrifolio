@@ -47,34 +47,10 @@ export default function UploadPage() {
                     />
                 </div>
 
-                {/* {uploadedImages.length > 0 && (
-                    <div className="space-y-4">
-                        <h2 className="text-xl font-semibold text-gray-900">
-                            Uploaded Images
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            {uploadedImages.map((image) => (
-                                <div
-                                    key={image.public_id}
-                                    className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden"
-                                >
-                                    <Image
-                                        src={image.secure_url}
-                                        alt="Uploaded image"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )} */}
+
                 <p>{uploadedImage?.secure_url}</p>
                 <div className=' flex justify-between px-5 items-center h-full'>
                     <Link href={'/'}><p className='text-blue-600'>Upload Later</p></Link>
-                    <button className='btn bg-blue-600 text-white hover:bg-slate-800'>
-                        Next
-                    </button>
                 </div>
             </div>
         </div>
