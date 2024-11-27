@@ -1,10 +1,16 @@
 // pages/index.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import MultiSelect from "@/app/components/MultiSelect";
+import { useRouter } from 'next/navigation'
+import ImageUpload from "@/app/components/ImageUpload";
+import { useBusinessContext } from "@/app/context/BusinessContext";
+
+
+
 
 const agribusinessOptions = [
   { value: "farming", label: "Farming" },
@@ -40,15 +46,28 @@ const expertiseOptions = [
   { value: "adaptability", label: "Adaptability" },
 ];
 
+
+
+
+
 const AgribusinessForm = () => {
+
+  //GETTING GLOBAL STATE VALUES
+  const { state, dispatch } = useBusinessContext();
+  //console.log(state)
+
+
+  const router = useRouter()
+
   const formik = useFormik({
     initialValues: {
-      history: "",
-      valuesOptions: [],
+      name: "",
+      historyAndMission: "",
+      values: [],
       valuesDetails: "",
-      agribusinessType: [],
+      businessTypes: [],
       businessTypesDetails: "",
-      sustainability: [],
+      sustainabilityPractices: [],
       sustainabilityDetails: "",
       expertise: [],
       expertiseDetails: "",
@@ -63,10 +82,50 @@ const AgribusinessForm = () => {
       // region: Yup.string().required("Region is required"),
       // city: Yup.string().required("City is required"),
     }),
+
     onSubmit: (values) => {
-      console.log(values)
-      //alert(JSON.stringify(values, null, 2));
+
+      let valuesArray: any = []
+      let businessTypeArray: any = []
+      let sustainabilityArray: any = []
+      let expertiseArray: any = []
+
+      values.values.forEach((value: any) => {
+        valuesArray.push(value.label)
+      })
+      values.businessTypes.forEach((businessType: any) => {
+        businessTypeArray.push(businessType.label)
+      })
+      values.sustainabilityPractices.forEach((sustainability: any) => {
+        sustainabilityArray.push(sustainability.label)
+      })
+      values.expertise.forEach((expertise: any) => {
+        expertiseArray.push(expertise.label)
+      })
+
+
+      //UPDATING GLOBAL STATE
+      const updatedProfile = {
+        //...state.businessProfile,
+
+        name: values.name,
+        historyAndMission: values.historyAndMission,
+        values: valuesArray,
+        valuesDetails: values.valuesDetails,
+        businessTypes: businessTypeArray,
+        businessTypesDetails: values.businessTypesDetails,
+        sustainabilityPractices: sustainabilityArray,
+        sustainabilityDetails: values.sustainabilityDetails,
+        expertise: expertiseArray,
+        expertiseDetails: values.expertiseDetails
+      }
+      dispatch({ type: 'SET_BUSINESS_PROFILE', payload: updatedProfile });
+
+      //console.log(values)
+      router.push('/profile/contact',)
     },
+
+
   });
 
   return (
@@ -76,6 +135,20 @@ const AgribusinessForm = () => {
     >
       <h1 className="text-2xl font-bold mb-8">About Your Agribusiness</h1>
 
+      {/* Agribusiness  Name*/}
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          What is the name of your business?
+        </label>
+        <textarea
+          rows={1}
+          id="name"
+          {...formik.getFieldProps("name")}
+          className="w-full border border-gray-300 rounded-md p-2"
+          placeholder="Enter Your Business Name "
+        />
+      </div>
+
       {/* Type of Agribusiness */}
 
       <div className="mb-4">
@@ -84,8 +157,8 @@ const AgribusinessForm = () => {
         </label>
         <MultiSelect
           options={agribusinessOptions}
-          value={formik.values.agribusinessType}
-          onChange={(value) => formik.setFieldValue("agribusinessType", value)}
+          value={formik.values.businessTypes}
+          onChange={(value) => formik.setFieldValue("businessTypes", value)}
           placeholder="Select Agribusiness Type"
         />
       </div>
@@ -111,8 +184,8 @@ const AgribusinessForm = () => {
         </label>
         <textarea
           rows={2}
-          id="history"
-          {...formik.getFieldProps("history")}
+          id="historyAndMission"
+          {...formik.getFieldProps("historyAndMission")}
           className="w-full border border-gray-300 rounded-md p-2"
           placeholder="Enter history and mission"
         />
@@ -125,8 +198,8 @@ const AgribusinessForm = () => {
         </label>
         <MultiSelect
           options={valuesOptions}
-          value={formik.values.valuesOptions}
-          onChange={(value) => formik.setFieldValue("valuesOptions", value)}
+          value={formik.values.values}
+          onChange={(value) => formik.setFieldValue("values", value)}
           placeholder="Select Values"
         />
       </div>
@@ -152,8 +225,8 @@ const AgribusinessForm = () => {
         </label>
         <MultiSelect
           options={sustainabilityOptions}
-          value={formik.values.sustainability}
-          onChange={(value) => formik.setFieldValue("sustainability", value)}
+          value={formik.values.sustainabilityPractices}
+          onChange={(value) => formik.setFieldValue("sustainabilityPractices", value)}
           placeholder="Select sustainability practices"
         />
       </div>
@@ -198,6 +271,26 @@ const AgribusinessForm = () => {
           placeholder="Write about your expertise..."
         />
       </div>
+
+      {/* Logo Upload
+      <div className=" px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center ">
+            <p className="mt-2 text-sm text-gray-600">
+              Do you have a Logo? Upload it below.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <ImageUpload
+              onUploadSuccess={handleUploadSuccess}
+              onUploadError={handleUploadError}
+              maxSize={5 * 1024 * 1024} // 5MB
+            />
+          </div>
+        </div>
+      </div> */}
+
       <button
         type="submit"
         //disabled={!formik.isValid || formik.isSubmitting}

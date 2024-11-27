@@ -69,6 +69,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 throw new Error(data.message || 'Upload failed');
             }
 
+
+
             onUploadSuccess?.(data.data);
             setPreview(null);
             setSelectedFile(null);

@@ -8,9 +8,10 @@ import { SetStateAction, useState } from "react";
 //     "https://via.placeholder.com/600x300",
 // ];
 
-export default function Gallery({ gallery }: { gallery: [{ url: string, title: string }] }) {
+export default function Gallery({ gallery }: { gallery: any }) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [currentImage, setCurrentImage] = useState(0);
+
 
     const openModal = (index: SetStateAction<number>) => {
         setCurrentImage(index);
@@ -33,14 +34,14 @@ export default function Gallery({ gallery }: { gallery: [{ url: string, title: s
         <div className="min-h-screen p-4">
             <h1 className="text-3xl font-semibold text-center mb-6">Gallery</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {gallery.map((image, index) => (
+                {gallery.map((image: any, index: number) => (
                     <div
                         key={index}
                         className="relative w-full h-56 bg-gray-300 rounded-lg overflow-hidden cursor-pointer"
                         onClick={() => openModal(index)}
                     >
                         <img
-                            src={image.url}
+                            src={image?.url}
                             alt={`Gallery image ${index + 1}`}
                             className="w-full h-full object-cover"
                             loading="lazy"

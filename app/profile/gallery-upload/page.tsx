@@ -4,12 +4,40 @@
 import React, { useState } from 'react';
 import MultiUpload, { UploadedFile } from '@/app/components/MultiUpload';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'
+import { useBusinessContext } from '@/app/context/BusinessContext';
+
+
+
 
 export default function UploadPage() {
     const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+    const { state, dispatch } = useBusinessContext();
+
+    const router = useRouter()
 
     const handleUploadSuccess = (files: UploadedFile[]) => {
         setUploadedFiles((prev) => [...prev, ...files]);
+
+        let data: { url: string; publicId: string; }[] = []
+
+        files.forEach((file) => {
+            let newFile = {
+                url: file.secure_url,
+                publicId: file.public_id
+            }
+
+            data.push(newFile)
+        })
+
+        const updatedGallery = {
+            //...state.gallery,
+            data
+        };
+
+        dispatch({ type: 'SET_GALLERY', payload: updatedGallery });
+
+        router.push('/profile/setting-up')
     };
 
     const handleUploadError = (error: string) => {

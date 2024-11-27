@@ -4,9 +4,20 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from 'next/navigation'
+import { useBusinessContext } from "@/app/context/BusinessContext";
+
+
 
 
 const AgribusinessForm = () => {
+
+  //GETTING GLOBAL STATE VALUES
+  const { state, dispatch } = useBusinessContext();
+
+
+  const router = useRouter()
+
   const formik = useFormik({
     initialValues: {
       country: "",
@@ -27,8 +38,27 @@ const AgribusinessForm = () => {
       // city: Yup.string().required("City is required"),
     }),
     onSubmit: (values) => {
-      console.log(values)
+
+
+      //UPDATING GLOBAL STATE
+      const updatedContact = {
+        ...state.contactInformation,
+        location: {
+          country: values.country,
+          region: values.region,
+          city: values.city,
+        },
+        contact: {
+          email: values.email,
+          phone: values.phone,
+        },
+        serviceAreas: values.serviceAreas.split(",")
+      };
+
+      dispatch({ type: 'SET_CONTACT_INFORMATION', payload: updatedContact });
+      //console.log(values)
       //alert(JSON.stringify(values, null, 2));
+      router.push('/profile/logo-upload')
     },
   });
 

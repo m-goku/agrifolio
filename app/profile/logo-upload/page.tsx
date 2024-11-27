@@ -5,8 +5,16 @@ import { useState } from 'react';
 import ImageUpload from '@/app/components/ImageUpload';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useBusinessContext } from '@/app/context/BusinessContext';
+import { useRouter } from 'next/navigation';
 
 export default function UploadPage() {
+
+    const router = useRouter()
+
+    const { state, dispatch } = useBusinessContext();
+    //console.log(state)
+
 
     interface UploadedImage {
         public_id: string;
@@ -21,6 +29,15 @@ export default function UploadPage() {
 
     const handleUploadSuccess = (image: UploadedImage) => {
         setUploadedImages(image);
+
+        const updatedProfile = {
+            ...state.businessProfile,
+            logo: image.secure_url
+        };
+
+        dispatch({ type: 'SET_BUSINESS_PROFILE', payload: updatedProfile });
+
+        router.push('/profile/gallery-upload')
     };
 
     const handleUploadError = (error: string) => {

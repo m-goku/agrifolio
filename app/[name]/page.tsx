@@ -74,7 +74,7 @@ const Card = ({ params }: { params: { name: string } }) => {
                     <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                         {/* Placeholder Logo */}
                         <div className="flex items-center space-x-4">
-                            <div className="w-16s h-14 bg-gray-300 rounded-full flex-shrink-0">
+                            <div className="w-16 h-14 bg-gray-300 rounded-full flex-shrink-0">
                                 <img
                                     src={profile.businessProfile?.logo}
                                     alt="Logo"
@@ -111,7 +111,7 @@ const Card = ({ params }: { params: { name: string } }) => {
                             </button>
                             <button
                                 onClick={() => setActiveTab("gallery")}
-                                className={`px-4 py-2 text-sm font-medium border-b-2 ${activeTab === "galery"
+                                className={`px-4 py-2 text-sm font-medium border-b-2 ${activeTab === "gallery"
                                     ? "border-green-800 text-green-800"
                                     : "border-transparent text-gray-500 hover:text-green-800 hover:border-gray-300"
                                     }`}
@@ -269,7 +269,10 @@ const Card = ({ params }: { params: { name: string } }) => {
                             </>
                         )}
                         {activeTab === "gallery" && (
-                            <Gallery gallery={profile?.gallery} />
+
+                            <Gallery gallery={profile?.gallery[0].data} />
+
+
                         )}
                         {activeTab === "contact" && (
                             <>
