@@ -65,7 +65,7 @@ const AgribusinessForm = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="p-6 max-w-3xl mx-auto bg-white "
+      className="p-6 max-w-3xl mx-auto bg-white pt-10"
     >
       <h1 className="text-2xl font-bold mb-8">Location and Contact</h1>
 

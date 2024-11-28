@@ -65,11 +65,9 @@ export default function UploadPage() {
                     />
                 </div>
 
-
-
                 {/* Footer */}
                 <div className="flex justify-between px-5 items-center mt-8">
-                    <Link href={'/'}>
+                    <Link href={'/profile/setting-up'}>
                         <p className="text-blue-600">Upload Later</p>
                     </Link>
                 </div>

@@ -1,13 +1,5 @@
 import { SetStateAction, useState } from "react";
 
-// const gallery = [
-//     "https://via.placeholder.com/600x400",
-//     "https://via.placeholder.com/600x450",
-//     "https://via.placeholder.com/600x500",
-//     "https://via.placeholder.com/600x350",
-//     "https://via.placeholder.com/600x300",
-// ];
-
 export default function Gallery({ gallery }: { gallery: any }) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [currentImage, setCurrentImage] = useState(0);

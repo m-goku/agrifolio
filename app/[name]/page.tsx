@@ -70,11 +70,11 @@ const Card = ({ params }: { params: { name: string } }) => {
     return (
         foundProfile ?
             (
-                <div className="mx-auto p-4 rounded-lg  bg-white w-full md:w-4/5 ">
+                <div className="mx-auto p-4 rounded-lg  bg-white w-full md:w-5/5 ">
                     <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                         {/* Placeholder Logo */}
                         <div className="flex items-center space-x-4">
-                            <div className="w-16 h-14 bg-gray-300 rounded-full flex-shrink-0">
+                            <div className="w-14 h-14 bg-gray-300 rounded-full flex-shrink-0">
                                 <img
                                     src={profile.businessProfile?.logo}
                                     alt="Logo"

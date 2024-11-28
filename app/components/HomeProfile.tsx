@@ -7,7 +7,7 @@ import { WhyAgrifolio } from "./WhyAgrifolio";
 
 export default function HomeProfile({ name, description, image }: { name: string, description: string, image?: string }) {
     return (
-        <div className="bg-white items-center flex flex-col">
+        <div className="bg-white items-center flex flex-col ">
             <div className=" pt-10 pb-10 flex items-center">
                 <div className="hero-content text-center flex-col lg:flex-row-reverse">
                     {/* <img
@@ -44,7 +44,7 @@ export default function HomeProfile({ name, description, image }: { name: string
 
 
             </div>
-            <div className="flex flex-col md:flex-row md:justify-center md:space-x-4 p-4 ">
+            {/* <div className="flex flex-col md:flex-row md:justify-center md:space-x-4 p-4 ">
                 <div className="flex-grow md:w-1/3">
                     <FeatureCard
                         icon="https://cdn-icons-png.flaticon.com/128/1001/1001371.png"
@@ -66,7 +66,7 @@ export default function HomeProfile({ name, description, image }: { name: string
                         description="Access powerful tools to track your progress, understand your audience, and expand your reach. With Agrofolio, you're not just another farm—you're a brand."
                     />
                 </div>
-            </div>
+            </div> */}
             {/* <div className="flex flex-col bg-slate-50 md:justify-center md:space-x-4 p-4">
                 <WhyAgrifolio />
             </div> */}

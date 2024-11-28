@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import ImageUpload from '@/app/components/ImageUpload';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useBusinessContext } from '@/app/context/BusinessContext';
 import { useRouter } from 'next/navigation';
@@ -63,11 +62,8 @@ export default function UploadPage() {
                         maxSize={5 * 1024 * 1024} // 5MB
                     />
                 </div>
-
-
-                <p>{uploadedImage?.secure_url}</p>
                 <div className=' flex justify-between px-5 items-center h-full'>
-                    <Link href={'/'}><p className='text-blue-600'>Upload Later</p></Link>
+                    <Link href={'/profile/gallery-upload'}><p className='text-blue-600'>Upload Later</p></Link>
                 </div>
             </div>
         </div>
