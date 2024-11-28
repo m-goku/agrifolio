@@ -1,20 +1,14 @@
 "use client";
 
 import { Key, useEffect, useState } from "react";
-
-import { DATA } from "../data";
 import Title from "../profile/Title";
 import Tags from "../profile//Tags";
 import Details from "../profile//Details";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Footer from "../components/Footer";
 import Gallery from "../components/Gallery";
 import HomeProfile from "../components/HomeProfile";
 const Card = ({ params }: { params: { name: string } }) => {
-    const router = useRouter()
-    interface Post {
-
-    }
 
     const [activeTab, setActiveTab] = useState("home");
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -75,7 +69,7 @@ const Card = ({ params }: { params: { name: string } }) => {
                         {/* Placeholder Logo */}
                         <div className="flex items-center space-x-4">
                             <div className="w-14 h-14 bg-gray-300 rounded-full flex-shrink-0">
-                                <img
+                                <Image
                                     src={profile.businessProfile?.logo}
                                     alt="Logo"
                                     className="w-full h-full object-cover rounded-full"
