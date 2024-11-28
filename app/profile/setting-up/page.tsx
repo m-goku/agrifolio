@@ -13,7 +13,7 @@ const ProfileSetupPage = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await fetch(`http://192.168.0.129:3001/profile/create`, {
+                const response = await fetch(`https://agrifolio-backend.onrender.com/profile/create`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

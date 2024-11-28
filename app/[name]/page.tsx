@@ -22,7 +22,7 @@ const Card = ({ params }: { params: { name: string } }) => {
         const getData = async () => {
             try {
 
-                const response = await fetch(`http://192.168.0.129:3001/profile/${params.name}`, {
+                const response = await fetch(`https://agrifolio-backend.onrender.com/profile/${params.name}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
