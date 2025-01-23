@@ -2,7 +2,7 @@ import FeatureCard from "./components/FeatureCard";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
-import { WhyAgrifolio } from "./components/WhyAgrifolio";
+//import { WhyAgrifolio } from "./components/WhyAgrifolio";
 
 export default function Home() {
   return (
@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col md:justify-center md:space-x-4 p-4">
-        <WhyAgrifolio />
+        {/* <WhyAgrifolio /> */}
       </div>
       <Footer />
     </div>

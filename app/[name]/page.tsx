@@ -1,13 +1,18 @@
 "use client";
 
 import { Key, useEffect, useState } from "react";
-import Title from "../profile/Title";
-import Tags from "../profile//Tags";
-import Details from "../profile//Details";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import Gallery from "../components/Gallery";
-import HomeProfile from "../components/HomeProfile";
+import HomeProfile from "../pages/HomeProfile";
+import AboutUsPage from "../pages/AboutUs";
+import { DATA } from "../data";
+import GalleryPage from "../pages/GalleryPage";
+import ContactsPage from "../pages/ContactsPage";
+import ProductsPage from "../pages/ProductsPage";
+
+
+
 const Card = ({ params }: { params: { name: string } }) => {
 
     const [activeTab, setActiveTab] = useState("home");
@@ -18,44 +23,51 @@ const Card = ({ params }: { params: { name: string } }) => {
     const [error, setError] = useState<string | null>(null);
     const [foundProfile, setFoundProfile] = useState<boolean>(false);
 
+
+
     useEffect(() => {
         const getData = async () => {
-            try {
+            // try {
 
-                const response = await fetch(`https://agrifolio-backend.onrender.com/profile/${params.name}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
+            //     const response = await fetch(`https://agrifolio-backend.onrender.com/profile/${params.name}`, {
+            //         method: "GET",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //     });
 
 
-                if (response.status === 404) {
-                    setFoundProfile(false)
-                    return
-                }
+            //     if (response.status === 404) {
+            //         setFoundProfile(false)
+            //         return
+            //     }
 
-                if (!response.ok) {
-                    setFoundProfile(false)
-                    return
-                }
+            //     if (!response.ok) {
+            //         setFoundProfile(false)
+            //         return
+            //     }
 
-                const result = await response.json();
-                //console.log(result.profile)
-                setProfile(result.profile);
-                setFoundProfile(true);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'An unknown error occurred');
-            } finally {
-                setLoading(false);
-            }
+            //     const result = await response.json();
+            //     //console.log(result.profile)
+            //     setProfile(result.profile);
+            //     setFoundProfile(true);
+            // } catch (err) {
+            //     setError(err instanceof Error ? err.message : 'An unknown error occurred');
+
+            // } finally {
+            //     setLoading(false);
+            // }
+
+            setProfile(DATA[0].profile)
+            setLoading(false)
+            setFoundProfile(true)
         };
 
         getData();
-    }, [params.name]); // re-fetch when the id in the params changes
+    }, []); // re-fetch when the id in the params changes
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <p>Error: {error}</p>; //PUT NETWORK ERRROR PAGE HERE
 
 
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
@@ -64,15 +76,17 @@ const Card = ({ params }: { params: { name: string } }) => {
     return (
         foundProfile ?
             (
-                <div className="mx-auto p-4 rounded-lg  bg-white w-full md:w-5/5 ">
-                    <div className="flex items-center justify-between border-b border-gray-200 pb-2">
+                <div className=" bg-gray-50 py-4 lg:w-5/5 lg:px-10">
+                    <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-4">
                         {/* Placeholder Logo */}
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-4 ">
                             <div className="w-14 h-14 bg-gray-300 rounded-full flex-shrink-0">
                                 <Image
                                     src={profile.businessProfile?.logo}
                                     alt="Logo"
                                     className="w-full h-full object-cover rounded-full"
+                                    height={100}
+                                    width={100}
                                 />
                             </div>
                             <h1 className="font-sans text-lg font-semibold  sm:block">
@@ -85,9 +99,9 @@ const Card = ({ params }: { params: { name: string } }) => {
                         <nav className="hidden md:flex space-x-4 ml-auto">
                             <button
                                 onClick={() => setActiveTab("home")}
-                                className={`px-4 py-2 text-sm font-medium border-b-2 ${activeTab === "home"
-                                    ? "border-green-800 text-green-700"
-                                    : "border-transparent text-gray-500 hover:text-green-800 hover:border-gray-300"
+                                className={`px-4 py-2  font-medium border-b-2 ${activeTab === "home"
+                                    ? "border-green-600 text-green-600"
+                                    : "border-transparent text-gray-500 hover:text-green-800 "
                                     }`}
                             >
                                 <p className="font-bold">Home</p>
@@ -95,9 +109,9 @@ const Card = ({ params }: { params: { name: string } }) => {
                             </button>
                             <button
                                 onClick={() => setActiveTab("about")}
-                                className={`px-4 py-2 text-sm font-medium border-b-2 ${activeTab === "about"
-                                    ? "border-green-800 text-green-800"
-                                    : "border-transparent text-gray-500 hover:text-green-800 hover:border-gray-300"
+                                className={`px-4 py-2  font-medium border-b-2 ${activeTab === "about"
+                                    ? "border-green-600 text-green-600"
+                                    : "border-transparent text-gray-500 hover:text-green-800 "
                                     }`}
                             >
                                 <p className="font-bold">About Us</p>
@@ -105,19 +119,30 @@ const Card = ({ params }: { params: { name: string } }) => {
                             </button>
                             <button
                                 onClick={() => setActiveTab("gallery")}
-                                className={`px-4 py-2 text-sm font-medium border-b-2 ${activeTab === "gallery"
-                                    ? "border-green-800 text-green-800"
-                                    : "border-transparent text-gray-500 hover:text-green-800 hover:border-gray-300"
+                                className={`px-4 py-2  font-medium border-b-2 ${activeTab === "gallery"
+                                    ? "border-green-600 text-green-600"
+                                    : "border-transparent text-gray-500 hover:text-green-800 "
                                     }`}
                             >
                                 <p className="font-bold">Gallery</p>
 
                             </button>
                             <button
+                                onClick={() => setActiveTab("products")}
+                                className={`px-4 py-2  font-medium border-b-2 ${activeTab === "products"
+                                    ? "border-green-600 text-green-600"
+                                    : "border-transparent text-gray-500 hover:text-green-800 "
+                                    }`}
+                            >
+                                <p className="font-bold">Products</p>
+
+                            </button>
+
+                            <button
                                 onClick={() => setActiveTab("contact")}
-                                className={`px-4 py-2 text-sm font-medium border-b-2 ${activeTab === "contact"
-                                    ? "border-green-500 text-green-500"
-                                    : "border-transparent text-gray-500 hover:text-blue-500 hover:border-gray-300"
+                                className={`px-4 py-2  font-medium border-b-2 ${activeTab === "contact"
+                                    ? "border-green-600 text-green-600"
+                                    : "border-transparent text-gray-500 hover:text-green-800 "
                                     }`}
                             >
                                 <p className="font-bold">Contact</p>
@@ -179,6 +204,16 @@ const Card = ({ params }: { params: { name: string } }) => {
                                     </button>
                                     <button
                                         onClick={() => {
+                                            setActiveTab("products");
+                                            toggleDropdown();
+                                        }}
+                                        className={`block w-full text-left px-4 py-2 text-sm font-medium ${activeTab === "products" ? "text-blue-500" : "text-gray-700"
+                                            } hover:bg-gray-100`}
+                                    >
+                                        Products
+                                    </button>
+                                    <button
+                                        onClick={() => {
                                             setActiveTab("contact");
                                             toggleDropdown();
                                         }}
@@ -193,104 +228,38 @@ const Card = ({ params }: { params: { name: string } }) => {
                     </div>
 
                     {/* Content */}
-                    <div className="p-4">
+                    <div className="p-4 h-full">
                         {activeTab === "home" && (
-                            <HomeProfile name={profile?.businessProfile?.name} description={profile?.businessProfile.businessTypesDetails} />
+                            <HomeProfile
+                                name={profile?.businessProfile?.heroText}
+                                description={profile?.businessProfile?.heroDescription}
+                                image={profile?.businessProfile?.heroImage}
+                                values={profile?.businessProfile?.values}
+                            />
                         )}
+
                         {activeTab === "about" && (
-                            <>
-                                <div className="border-b border-gray-200 ">
-                                    <Title title="What We Do" />
-                                    <div
-                                        className="grid-cols2 md:grid-cols-2 lg:grid-cols-3"
-                                    >
-                                        {profile?.businessProfile.businessTypes.map((b: string, i: Key | null | undefined) => (
-                                            <Tags
-                                                key={i}
-                                                details={b}
-                                            />
-                                        ))}
-                                    </div>
-                                    <Details
-                                        details={profile?.businessProfile.businessTypesDetails}
-                                    />
-                                    <div className="mb-10" />
-                                </div>
-                                <div className="border-b border-gray-200">
-                                    <Title title="History & Mission" />
-                                    <Details details={profile?.businessProfile.historyAndMission} />
-                                    <div className="mb-10" />
-                                </div>
-                                <div className="border-b border-gray-200">
-                                    <Title title="Our Values" />
-                                    <div className="grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-                                        {profile?.businessProfile.values.map((b: string, i: Key | null | undefined) => (
-                                            <Tags
-                                                key={i}
-                                                details={b}
-                                            />
-                                        ))}
-                                    </div>
-                                    <Details details={profile?.businessProfile.valuesDetails} />
-                                    <div className="mb-10" />
-                                </div>
-                                <div className="border-b border-gray-200">
-                                    <Title title="Sustainability Practices" />
-                                    <div className="grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-                                        {profile.businessProfile.sustainabilityPractices.map((b: string, i: Key | null | undefined) => (
-                                            <Tags
-                                                key={i}
-                                                details={b}
-                                            />
-                                        ))}
-                                    </div>
-                                    <Details details={profile?.businessProfile.sustainabilityDetails} />
-                                    <div className="mb-10" />
-                                </div>
-                                <div className="border-b border-gray-200">
-                                    <Title title="Agricultural Expertise" />
-                                    <div className="grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-                                        {profile?.businessProfile?.agriculturalExpertise?.map((b: string, i: Key | null | undefined) => (
-                                            <Tags
-                                                key={i}
-                                                details={b}
-                                            />
-                                        ))}
-                                    </div>
-                                    <Details details={profile?.businessProfile.expertiseDetails} />
-                                    <div className="mb-10" />
-                                </div>
-                            </>
+                            <AboutUsPage
+                                aboutData={profile?.businessProfile?.aboutUs}
+                            />
                         )}
                         {activeTab === "gallery" && (
-
-                            <Gallery gallery={profile?.gallery[0].data} />
-
-
+                            <GalleryPage
+                                data={profile?.gallery[0].data}
+                            />
                         )}
+
+                        {activeTab === "products" && (
+                            <ProductsPage
+                                button={true}
+                                productData={profile?.businessProfile?.products}
+                            />
+                        )}
+
                         {activeTab === "contact" && (
-                            <>
-                                <div className="border-b border-gray-200">
-                                    <Title title="Location" />
-                                    <Details
-                                        details={profile?.contactInformation.location.address}
-                                    />
-                                    <Details details={profile?.contactInformation.location.city} />
-                                    <Details
-                                        details={`${profile?.contactInformation.location.region} - ${profile?.contactInformation.location.country}`}
-                                    />
-                                </div>
-                                <div className="border-b border-gray-200">
-                                    <Title title="Contact Information" />
-                                    <Details details={profile?.contactInformation.contact.email} />
-                                    <Details
-                                        details={profile?.contactInformation.contact.businessNumber}
-                                    />
-                                    <Details
-                                        details={profile?.contactInformation.contact.phoneNumber}
-                                    />
-                                </div>
-                            </>
+                            <ContactsPage
+                                contactData={profile?.contactInformation}
+                            />
                         )}
                     </div>
                     <Footer />

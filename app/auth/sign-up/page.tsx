@@ -88,8 +88,8 @@ const Signup = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row  bg-slate-50">
-      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col w-full lg:flex-row lg:shadow-lg mt-20">
+    <div className="min-h-screen flex flex-col lg:flex-row  lg:bg-slate-50 lg:items-center lg:justify-center">
+      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col lg:w-3/5 lg:flex-row lg:shadow-lg mt-20">
         {/* Left Section - Image Background (hidden on mobile) */}
         <div
           className="hidden lg:block lg:w-1/2 bg-cover bg-center"
@@ -219,7 +219,7 @@ const Signup = () => {
 
           {/* Existing User Link */}
           <p className="mt-6 text-sm text-center">
-            Existing user?{" "}
+            Existing user?
             <a href="/auth/login" className="text-blue-500 underline">
               Sign in
             </a>

@@ -24,7 +24,6 @@ export default function Gallery({ gallery }: { gallery: any }) {
 
     return (
         <div className="min-h-screen p-4">
-            <h1 className="text-3xl font-semibold text-center mb-6">Gallery</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {gallery.map((image: any, index: number) => (
                     <div
@@ -40,6 +39,7 @@ export default function Gallery({ gallery }: { gallery: any }) {
                         />
                     </div>
                 ))}
+
             </div>
 
             {isModalOpen && (

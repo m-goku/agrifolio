@@ -80,8 +80,8 @@ const Login = () => {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-slate-50 ">
-      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col w-full lg:flex-row lg:shadow-lg mt-20">
+    <div className="flex flex-col lg:flex-row min-h-screen lg:bg-slate-50 lg:items-center lg:justify-center">
+      <div className="lg:ml-40 lg:mr-40 lg:mt-10 lg:mb-40 flex flex-col lg:w-3/5 lg:flex-row lg:shadow-lg mt-20">
         {/* Left Section - Image Background */}
         <div
           className="hidden lg:block lg:w-1/2 bg-cover bg-center"
