@@ -12,7 +12,7 @@ function Hero() {
         />
         <div className="lg:pl-6">
           <h1 className="text-4xl font-bold text-slate-800">
-            Modern Portfolio for You and Your Agribusiness
+            Modern Portfolio Builder for You and Your Agribusiness
           </h1>
           <p className="py-6 text-slate-600">
             Create a powerful online presence with customizable profiles,

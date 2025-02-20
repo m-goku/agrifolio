@@ -47,26 +47,16 @@ export default function HomeProfile({ name, description, image, divide, button, 
 
     return (
         <>
-            {
-                button &&
-                <div className="flex w-full justify-end px-4 ">
-                    <button
-                        onClick={() => setIsOpen("Welcome")}
-                        className="btn bg-white text-green-800 px-4 py-2 rounded shadow-md transition-all"
-                    >
-                        Edit
-                    </button>
-                </div>
-            }
-
+            {/* ............HERO MODAL............. */}
             {isOpen === "Welcome" &&
                 <ModalExample title="Hero Section">
                     <>
 
                         <Formik
                             initialValues={{
-                                heading: "Welcome to Mike", // Initial value for name
-                                description: "example@example.com",          // Initial value for email
+                                heading: name, // Initial value for name
+                                description: description,          // Initial value for email
+                                image: image
                             }}
                             onSubmit={(values) => {
                                 console.log(values); // Log form values on submit
@@ -104,8 +94,9 @@ export default function HomeProfile({ name, description, image, divide, button, 
 
                                     <div>
                                         <img
+                                            id="image"
                                             //onClick={}
-                                            src="https://via.placeholder.com/800x400"
+                                            src={image}
                                             alt="Our Process"
                                             className="rounded-md shadow-sm"
                                         />
@@ -133,86 +124,136 @@ export default function HomeProfile({ name, description, image, divide, button, 
                         </Formik>
                     </>
                 </ModalExample>}
-            {isOpen === "Core" && <ModalExample title="Our Core Values">
-                <>
 
-                    <Formik
-                        initialValues={{
-                            values_1: "First Core Value", // Initial value for name
-                            values_2: "Second Core Value",          // Initial value for email
-                            values_3: "Third Core Valuue",          // Initial value for email
-                        }}
-                        onSubmit={(values) => {
-                            console.log(values); // Log form values on submit
-                        }}
-                    >
-                        {({ getFieldProps, handleSubmit }) => (
-                            <form onSubmit={handleSubmit} className="p-6">
+            {/* ............CORE VALUES MODAL................. */}
+            {isOpen === "Core" &&
+                <ModalExample title="Our Core Values">
+                    <>
 
-                                {/* Values 1 */}
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700">
-                                        What is your first core value?
-                                    </label>
-                                    <textarea
-                                        {...getFieldProps("values_1")}
-                                        rows={3}
-                                        id="values_1"
-                                        className="w-full border border-gray-300 rounded-md p-2"
-                                        placeholder="Enter your core values"
-                                    />
-                                </div>
-                                {/* Values 2 */}
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700">
-                                        What is your second core value?
-                                    </label>
-                                    <textarea
-                                        {...getFieldProps("values_2")}
-                                        rows={3}
-                                        id="values_2"
-                                        className="w-full border border-gray-300 rounded-md p-2"
-                                        placeholder="Enter your core values"
-                                    />
-                                </div>
-                                {/* Values 3 */}
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700">
-                                        What is your third core value?
-                                    </label>
-                                    <textarea
-                                        {...getFieldProps("values_3")}
-                                        rows={3}
-                                        id="values_3"
-                                        className="w-full border border-gray-300 rounded-md p-2"
-                                        placeholder="Enter your core values"
-                                    />
-                                </div>
+                        <Formik
+                            initialValues={{
+                                title_1: values[0].title,
+                                title_2: values[1].title,
+                                title_3: values[2].title,
+                                values_1: values[0].content,
+                                values_2: values[1].content,
+                                values_3: values[2].content,
+                            }}
+                            onSubmit={(values) => {
+                                console.log(values); // Log form values on submit
+                            }}
+                        >
+                            {({ getFieldProps, handleSubmit }) => (
+                                <form onSubmit={handleSubmit} className="p-6">
+
+                                    {/* Values 1 */}
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            What is your first core value?
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("title_1")}
+                                            rows={1}
+                                            id="title_1"
+                                            className="w-full border border-gray-300 rounded-md p-2 mb-2"
+                                            placeholder="Enter your core values"
+                                        />
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            About your First core value
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("values_1")}
+                                            rows={3}
+                                            id="values_1"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="Enter your core values"
+                                        />
+                                    </div>
+                                    {/* Values 2 */}
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            What is your second core value?
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("title_2")}
+                                            rows={1}
+                                            id="title_2"
+                                            className="w-full border border-gray-300 rounded-md p-2 mb-2"
+                                            placeholder="Enter your core values"
+                                        />
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            About your second core value
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("values_2")}
+                                            rows={3}
+                                            id="values_2"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="Enter your core values"
+                                        />
+                                    </div>
+                                    {/* Values 3 */}
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            What is your third core value?
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("title_3")}
+                                            rows={1}
+                                            id="title_3"
+                                            className="w-full border border-gray-300 rounded-md p-2 mb-2"
+                                            placeholder="Enter your core values"
+                                        />
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            About your third core value
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("values_3")}
+                                            rows={3}
+                                            id="values_3"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="Enter your core values"
+                                        />
+                                    </div>
 
 
-                                {/* Submit Button */}
+                                    {/* Submit Button */}
 
-                                <div className="mt-20 flex justify-end space-x-2">
-                                    <button
-                                        onClick={closeModal}
-                                        className="px-4 py-2 bg-red-300 text-white rounded hover:bg-red-400"
-                                    >
-                                        Discard
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        onClick={closeModal}
-                                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                                    >
-                                        Save
-                                    </button>
-                                </div>
-                            </form>
-                        )}
-                    </Formik>
-                </>
-            </ModalExample>}
+                                    <div className="mt-20 flex justify-end space-x-2">
+                                        <button
+                                            onClick={closeModal}
+                                            className="px-4 py-2 bg-red-300 text-white rounded hover:bg-red-400"
+                                        >
+                                            Discard
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            onClick={closeModal}
+                                            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                        >
+                                            Save
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+                        </Formik>
+                    </>
+                </ModalExample>}
+
+
             <div className="bg-gray-50 items-center flex flex-col justify-center ">
+                {/* ..........HERO CONTENT................... */}
+                {
+                    button &&
+                    <div className="flex w-full justify-end px-4 mt-3">
+                        <button
+                            onClick={() => setIsOpen("Welcome")}
+                            className="btn bg-white text-green-800 px-4 py-2 rounded shadow-md transition-all"
+                        >
+                            Edit
+                        </button>
+                    </div>
+                }
                 <div className=" pt-10 pb-10 flex w-full justify-center">
                     <div className="hero-content flex-col lg:flex-row-reverse ">
                         <img
@@ -237,7 +278,9 @@ export default function HomeProfile({ name, description, image, divide, button, 
                     </div>
                 </div>
 
-                {divide && <div className="divider divider-neutral bg-slate-50 "></div>}
+                {divide && <div className="divider divider-neutral bg-white "></div>}
+
+                {/* ..............CORE VALUES CONTENT.............. */}
                 {button &&
                     <div className="flex w-full justify-end px-4 ">
                         <button
@@ -248,10 +291,8 @@ export default function HomeProfile({ name, description, image, divide, button, 
                             Edit
                         </button>
                     </div>}
-
-
                 <div>
-                    {/* <h1 className="flex justify-center text-3xl mb-10 font-bold text-green-800 ">Our Core Values</h1> */}
+                    <h1 className="flex justify-center text-3xl mb-10 font-bold text-green-800 ">Our Core Values</h1>
                     <div className="flex flex-col md:flex-row md:justify-center md:space-x-4 p-4 ">
                         <div className="flex-grow md:w-1/3">
                             <FeatureCard

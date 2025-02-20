@@ -49,19 +49,19 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
 
     return (
         <div className="font-sans text-gray-800">
-            {/* Hero Section */}
+            {/* PAGE HEADER */}
             <section className="text-center py-16 bg-gray-50">
                 <h1 className="text-4xl font-bold">About Us</h1>
             </section>
 
-            {/* Who We Are */}
+            {/* WHO WE ARE MODAl */}
             {isOpen === "WhoWeAre" &&
                 <ModalExample title="Who We Are">
                     <>
                         <Formik
                             initialValues={{
-                                whoWeAre: "Who We Are", // Initial value for name
-                                whoWeAreImage: "example@example.com",          // Initial value for email
+                                whoWeAre: aboutData.whoWeAre,
+                                whoWeAreImage: aboutData.whoWeAreImage,
                             }}
                             onSubmit={(values) => {
                                 console.log(values); // Log form values on submit
@@ -87,8 +87,8 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                                     <div>
                                         <img
                                             //onClick={}
-                                            src="https://via.placeholder.com/600x400"
-                                            alt="Our Process"
+                                            src={aboutData.whoWeAreImage}
+                                            alt="Who We Are"
                                             className="rounded-md shadow-sm"
                                         />
                                     </div>
@@ -115,13 +115,15 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                         </Formik>
                     </>
                 </ModalExample>}
+
+            {/* WHAT WE DO */}
             {isOpen === "WhatWeDo" &&
                 <ModalExample title="What We Do">
                     <>
                         <Formik
                             initialValues={{
-                                whatWeDo: "What We Do", // Initial value for name
-                                whatWeDoImage: "example@example.com",          // Initial value for email
+                                whatWeDo: aboutData.whatWeDo,
+                                whatWeDoImage: aboutData.whatWeDoImage
                             }}
                             onSubmit={(values) => {
                                 console.log(values); // Log form values on submit
@@ -147,8 +149,8 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                                     <div>
                                         <img
                                             //onClick={}
-                                            src="https://via.placeholder.com/600x400"
-                                            alt="Our Process"
+                                            src={aboutData.whatWeDoImage}
+                                            alt="What We Do"
                                             className="rounded-md shadow-sm"
                                         />
                                     </div>
@@ -175,13 +177,15 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                         </Formik>
                     </>
                 </ModalExample>}
+
+            {/* OUR HISTORY */}
             {isOpen === "History" &&
                 <ModalExample title="Our History & Mission">
                     <>
                         <Formik
                             initialValues={{
-                                history: "Our History & Mission", // Initial value for name
-                                historyImage: "example@example.com",          // Initial value for email
+                                history: aboutData.historyAndMission,
+                                historyImage: aboutData.historyAndMissionImage
                             }}
                             onSubmit={(values) => {
                                 console.log(values); // Log form values on submit
@@ -193,22 +197,22 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                                     {/* Our History & Mission */}
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-gray-700">
-                                            What is your business about?
+                                            Whats the history behind your business?
                                         </label>
                                         <textarea
                                             {...getFieldProps("history")}
                                             rows={6}
                                             id="history"
                                             className="w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="What is your business about?"
+                                            placeholder="Whats the history behind your business?"
                                         />
                                     </div>
                                     {/* Our History & Mission Image */}
                                     <div>
                                         <img
                                             //onClick={}
-                                            src="https://via.placeholder.com/600x400"
-                                            alt="Our Process"
+                                            src={aboutData.historyAndMissionImage}
+                                            alt="History & Mission"
                                             className="rounded-md shadow-sm"
                                         />
                                     </div>
@@ -235,13 +239,15 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                         </Formik>
                     </>
                 </ModalExample>}
+
+            {/* VALUES MODAL */}
             {isOpen === "Values" &&
                 <ModalExample title="Our Values">
                     <>
                         <Formik
                             initialValues={{
-                                values: "Our Values", // Initial value for name
-                                valuesImage: "example@example.com",          // Initial value for email
+                                values: aboutData.values,
+                                valuesImage: aboutData.valuesImage
                             }}
                             onSubmit={(values) => {
                                 console.log(values); // Log form values on submit
@@ -253,22 +259,22 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                                     {/* Our Values */}
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-gray-700">
-                                            What are your core values?
+                                            What are your core values as a business?
                                         </label>
                                         <textarea
                                             {...getFieldProps("values")}
                                             rows={6}
                                             id="values"
                                             className="w-full border border-gray-300 rounded-md p-2"
-                                            placeholder="What are your core values?"
+                                            placeholder="What are your core values as a business?"
                                         />
                                     </div>
                                     {/* Our Values Image */}
                                     <div>
                                         <img
                                             //onClick={}
-                                            src="https://via.placeholder.com/600x400"
-                                            alt="Our Process"
+                                            src={aboutData.valuesImage}
+                                            alt="Our Values"
                                             className="rounded-md shadow-sm"
                                         />
                                     </div>
@@ -296,13 +302,15 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                     </>
 
                 </ModalExample>}
-            {isOpen === "Sustainability" &&
-                <ModalExample title="Sustainability Practices">
+
+            {/* OUR TEAM MODAL */}
+            {isOpen === "Team" &&
+                <ModalExample title="Our Team">
                     <>
                         <Formik
                             initialValues={{
-                                sustainability: "Sustainability Practices", // Initial value for name
-                                sustainabilityImage: "example@example.com",          // Initial value for email
+                                ourTeam: aboutData.ourTeam,
+                                ourTeamImage: aboutData.ourTeamImage
                             }}
                             onSubmit={(values) => {
                                 console.log(values); // Log form values on submit
@@ -314,22 +322,22 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                                     {/* Sustainability Practices */}
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-gray-700">
-                                            What are your sustainability practices?
+                                            Talk about your team
                                         </label>
                                         <textarea
                                             {...getFieldProps("sustainability")}
                                             rows={6}
                                             id="sustainability"
                                             className="w-full border border-gray-300 rounded-md p-2"
-                                            placeholder=" What are your sustainability practices?"
+                                            placeholder=" Talk about your team"
                                         />
                                     </div>
                                     {/* Sustainability Practices Image */}
                                     <div>
                                         <img
                                             //onClick={}
-                                            src="https://via.placeholder.com/600x400"
-                                            alt="Our Process"
+                                            src={aboutData.ourTeamImage}
+                                            alt="Our Team"
                                             className="rounded-md shadow-sm"
                                         />
                                     </div>
@@ -358,10 +366,10 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                 </ModalExample>}
 
 
-
-
-
             {divide && <div className="divider divider-neutral bg-slate-50 "></div>}
+
+
+            {/* *********** WHO WE ARE ********* */}
             {button &&
                 <div className="flex w-full justify-end px-4 ">
                     <button
@@ -373,7 +381,7 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                     </button>
                 </div>}
 
-            {/* Who We Are */}
+
             <section className="container mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                     <h2 className="text-3xl font-bold mb-4">Who We Are</h2>
@@ -393,7 +401,11 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                 </div>
             </section>
 
+
             {divide && <div className="divider divider-neutral bg-slate-50 "></div>}
+
+
+            {/*  ************* WHAT WE DO ************** */}
             {button &&
                 <div className="flex w-full justify-end px-4 ">
                     <button
@@ -405,7 +417,6 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                     </button>
                 </div>}
 
-            {/* What We Do */}
             <section className="container mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="order-2 md:order-1">
                     <img
@@ -424,7 +435,12 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                 </div>
             </section>
 
+
+
             {divide && <div className="divider divider-neutral bg-slate-50 "></div>}
+
+
+            {/*  ************* OUR HISTORY ************** */}
             {button &&
                 <div className="flex w-full justify-end px-4 ">
                     <button
@@ -436,7 +452,7 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                     </button>
                 </div>}
 
-            {/* Our History and Mission */}
+
             <section className="container mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                     <h2 className="text-3xl font-bold mb-4">Our History & Mission</h2>
@@ -455,7 +471,11 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                 </div>
             </section>
 
+
+
             {divide && <div className="divider divider-neutral bg-slate-50 "></div>}
+
+            {/*  ************* OUR VALUES ************** */}
             {button &&
                 <div className="flex w-full justify-end px-4 ">
                     <button
@@ -467,7 +487,7 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                     </button>
                 </div>}
 
-            {/* Our Values */}
+
             <section className="container mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="order-2 md:order-1">
                     <img
@@ -487,10 +507,13 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
             </section>
 
             {divide && <div className="divider divider-neutral bg-slate-50 "></div>}
+
+
+            {/*  ************* OUR TEAM ************** */}
             {button &&
                 <div className="flex w-full justify-end px-4 ">
                     <button
-                        onClick={() => setIsOpen("Sustainability")}
+                        onClick={() => setIsOpen("Team")}
                         type="submit"
                         className="btn bg-white text-blue-500 px-4 py-2 rounded shadow-md transition-all"
                     >
@@ -498,7 +521,7 @@ export default function AboutUsPage({ divide, button, aboutData }: { divide?: bo
                     </button>
                 </div>}
 
-            {/* Our Team */}
+
             <section className="container mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
                     <h2 className="text-3xl font-bold mb-4">Our Team</h2>

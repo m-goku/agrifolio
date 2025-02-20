@@ -43,6 +43,7 @@ const ContactsPage = ({ button, contactData }: { button?: boolean, contactData?:
 
     return (
         <>
+            {/* ************ CONTACT MODAL ************* */}
             {isOpen === "edit" &&
                 <ModalExample title="Contact Information">
                     <>
@@ -70,6 +71,78 @@ const ContactsPage = ({ button, contactData }: { button?: boolean, contactData?:
                                             placeholder="Enter Hero Heading"
                                         />
                                     </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Email
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("heading")}
+                                            rows={1}
+                                            id="email"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="What is your business email?"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Phone Number
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("heading")}
+                                            rows={1}
+                                            id="phone"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="What is your business phone number?"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Location
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("heading")}
+                                            rows={1}
+                                            id="location"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="Where is your business located?"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Service Areas
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("heading")}
+                                            rows={1}
+                                            id="serviceAreas"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="Which areas does your business serve?"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Working Hours
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("heading")}
+                                            rows={1}
+                                            id="workingHours"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="What are your business working hours?"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700">
+                                            Additional Information (Optional)
+                                        </label>
+                                        <textarea
+                                            {...getFieldProps("heading")}
+                                            rows={1}
+                                            id="additionalInfo"
+                                            className="w-full border border-gray-300 rounded-md p-2"
+                                            placeholder="Enter Additional Information"
+                                        />
+                                    </div>
 
 
                                     {/* Submit Button */}
@@ -93,6 +166,9 @@ const ContactsPage = ({ button, contactData }: { button?: boolean, contactData?:
                         </Formik>
                     </>
                 </ModalExample>}
+
+
+            {/* ************ CONTACT ************* */}
             {
                 button &&
                 <div className="flex w-full justify-end px-4 ">
@@ -104,30 +180,30 @@ const ContactsPage = ({ button, contactData }: { button?: boolean, contactData?:
                     </button>
                 </div>
             }
-            <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-                <h1>Contact Us</h1>
+            <div className="min-h-screen" style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+                <h1 className='mb-5 font-bold'>Contact Us</h1>
                 <div style={{ marginBottom: '20px' }}>
-                    <h2>Email</h2>
+                    <h2 className='font-bold'>Email</h2>
                     <p>{contactData?.email}</p>
                 </div>
                 <div style={{ marginBottom: '20px' }}>
-                    <h2>Phone Number</h2>
+                    <h2 className='font-bold'>Phone Number</h2>
                     <p>{contactData?.phone}</p>
                 </div>
                 <div style={{ marginBottom: '20px' }}>
-                    <h2>Location</h2>
-                    <p>{contactData?.email}<br />{contactData?.city}, {contactData?.region}, {contactData?.country}</p>
+                    <h2 className='font-bold'>Location</h2>
+                    <p>{contactData?.city}, {contactData?.region}, {contactData?.country}</p>
                 </div>
                 <div style={{ marginBottom: '20px' }}>
-                    <h2>Service Areas</h2>
+                    <h2 className='font-bold'>Service Areas</h2>
                     <p>{contactData?.city}, {contactData?.region}, Surrounding Areas</p>
                 </div>
                 <div style={{ marginBottom: '20px' }}>
-                    <h2>Working Hours</h2>
+                    <h2 className='font-bold'>Working Hours</h2>
                     <p>{contactData?.workingHours}</p>
                 </div>
                 <div style={{ marginBottom: '20px' }}>
-                    <h2>Additional Information</h2>
+                    <h2 className='font-bold'>Additional Information</h2>
                     <p>{contactData?.additionalInfo}</p>
                 </div>
             </div>
