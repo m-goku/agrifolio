@@ -1,45 +1,63 @@
+// types/profile.ts
+
+export interface Value {
+  id: number;
+  title: string;
+  content: string;
+}
+
+export interface Services {
+        serviceTitle: string,
+        serviceDescription: string,
+        serviceCategory: string,
+        location: string,
+        priceRange: string,
+        availability: string,
+        image: string,
+}
+
+export interface AboutUs {
+  whoWeAre: string;
+  whoWeAreImage: string;
+  whatWeDo: string;
+  whatWeDoImage: string;
+  historyAndMission: string;
+  historyAndMissionImage: string;
+  values: string;
+  valuesImage: string;
+  ourTeam: string;
+  ourTeamImage: string;
+}
+
 export interface BusinessProfile {
-    logo: string;
-    name: string;
-    businessTypes: string[];
-    businessTypesDetails: string;
-    historyAndMission: string;
-    values: string[];
-    valuesDetails: string;
-    sustainabilityPractices: string[];
-    sustainabilityDetails: string;
-    agriculturalExpertise: string[];
-    expertiseDetails: string;
+  logo: string;
+  name: string;
+  heroText: string;
+  heroDescription: string;
+  heroImage: string;
+  values: Value[];
+  aboutUs: AboutUs;
+  services: Services[];
 }
 
 export interface ContactInformation {
-    location: {
-        country: string;
-        region: string;
-        city: string;
-        address: string;
-    };
-    contact: {
-        email: string;
-        phone: string;
-    };
-    serviceAreas: string[];
+  country: string;
+  region: string;
+  city: string;
+  email: string;
+  phone: string;
+  address: string;
+  serviceAreas: string[];
+  workingHours: string;
+  additionalInfo: string;
 }
 
 export interface GalleryItem {
-    url: string;
-    publicId: string;
+  data: { url: string; publicId: string }[];
 }
 
-export interface State {
-    businessProfile: BusinessProfile;
-    contactInformation: ContactInformation;
-    gallery: GalleryItem[];
+export interface Profile {
+  businessProfile: BusinessProfile;
+  contactInformation: ContactInformation;
+  gallery: GalleryItem[];
 }
-
-export type Action =
-    | { type: 'SET_BUSINESS_PROFILE'; payload: BusinessProfile }
-    | { type: 'SET_CONTACT_INFORMATION'; payload: ContactInformation }
-    | { type: 'SET_GALLERY'; payload: GalleryItem[] }
-    | { type: 'RESET_STATE' }
-    | any;
