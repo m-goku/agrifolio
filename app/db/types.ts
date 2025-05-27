@@ -58,8 +58,8 @@ export type ProfileTypes = {
     city: string;
     address: string;
     email: string;
-    phone: string[];
-    serviceAreas: string[];
+    phone: string;
+    serviceAreas: string;
     workingHours: string;
     additionalInfo: string;
   };
