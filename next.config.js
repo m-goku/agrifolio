@@ -1,5 +1,7 @@
+const withFlowbiteReact = require("flowbite-react/plugin/nextjs");
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withFlowbiteReact({
   images: {
     domains: ["res.cloudinary.com"], // Add Cloudinary domain
     remotePatterns: [
@@ -23,4 +25,4 @@ module.exports = {
   //         },
   //     ];
   // },
-};
+});

@@ -48,6 +48,7 @@ const Card = ({ params }: { params: { name: string } }) => {
         return;
       }
       setGlobalStore(result);
+      console.log(result);
     };
 
     getData();
@@ -376,7 +377,7 @@ const Card = ({ params }: { params: { name: string } }) => {
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r">
         <div className="text-center space-y-6">
-          <h1 className="text-4xl font-extrabold md:text-8xl">404</h1>
+          <h1 className="text-4xl font-extrabold md:text-8xl">404!!</h1>
           <p className="text-xl md:text-3xl">Oops! Page not found.</p>
           <p className="text-md md:text-xl">
             The page you're looking for might have been moved or deleted.
