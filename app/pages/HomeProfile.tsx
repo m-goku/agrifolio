@@ -70,7 +70,11 @@ export default function HomeProfile({
               onSubmit={(values) => {
                 closeModal();
                 console.log(values); // Log form values on submit
-                setBusinessProfile({ heroText: values.heading });
+                setBusinessProfile({
+                  heroText: values.heading,
+                  heroDescription: values.description,
+                  logo: values.image,
+                });
               }}
             >
               {({ getFieldProps, handleSubmit }) => (
@@ -151,7 +155,27 @@ export default function HomeProfile({
                 values_3: values[2].content,
               }}
               onSubmit={(values) => {
+                closeModal();
                 console.log(values); // Log form values on submit
+                setBusinessProfile({
+                  keyServices: [
+                    {
+                      id: 1,
+                      title: values.title_1,
+                      content: values.values_1,
+                    },
+                    {
+                      id: 2,
+                      title: values.title_2,
+                      content: values.values_2,
+                    },
+                    {
+                      id: 3,
+                      title: values.title_3,
+                      content: values.values_3,
+                    },
+                  ],
+                });
               }}
             >
               {({ getFieldProps, handleSubmit }) => (
@@ -237,7 +261,7 @@ export default function HomeProfile({
                     </button>
                     <button
                       type="submit"
-                      onClick={closeModal}
+                      onClick={() => handleSubmit}
                       className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                     >
                       Save

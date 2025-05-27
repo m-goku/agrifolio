@@ -34,7 +34,7 @@ export default function Home({ params }: { params: { name: string } }) {
     const getData = async () => {
       const response = await fetch(`/api/${params.name}`);
       const result = await response.json();
-      console.log(result);
+      //  console.log(result.);
 
       if (result.status === 404) {
         setFoundProfile(false);
@@ -234,7 +234,7 @@ export default function Home({ params }: { params: { name: string } }) {
                 {activeTab === "products" && (
                   <ProductsPage
                     button={true}
-                    productData={profile?.businessProfile?.products}
+                    productData={profile?.businessProfile?.services}
                   />
                 )}
                 {activeTab === "contact" && (

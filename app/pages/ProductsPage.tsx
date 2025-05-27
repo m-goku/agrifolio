@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import { Formik } from "formik";
+import { useProfileStore } from "../context/store";
 
 const ProductsPage = ({
   button,
@@ -11,9 +12,12 @@ const ProductsPage = ({
   productData?: any;
 }) => {
   const [productList, setProductList] = useState(productData);
+  // console.log(productList);
   const [isOpen, setIsOpen] = useState<any>(null);
   const closeModal = () => setIsOpen(null);
   const [currentProduct, setCurrentProduct] = useState<any>(null);
+
+  const { globalStore, setGlobalStore, setBusinessProfile } = useProfileStore();
 
   function ModalExample({ title, children }: { title: string; children: any }) {
     return (
@@ -54,6 +58,7 @@ const ProductsPage = ({
           <>
             <Formik
               initialValues={{
+                serviceId: currentProduct?.serviceId,
                 serviceTitle: currentProduct?.serviceTitle,
                 serviceDescription: currentProduct?.serviceDescription,
                 serviceCategory: currentProduct?.serviceCategory,
@@ -63,50 +68,102 @@ const ProductsPage = ({
                 image: currentProduct?.image,
               }}
               onSubmit={(values) => {
-                console.log(values); // Log form values on submit
+                closeModal();
+
+                (currentProduct["serviceId"] = currentProduct?.serviceId),
+                  (currentProduct["serviceTitle"] = values.serviceTitle),
+                  (currentProduct["serviceDescription"] =
+                    values.serviceDescription);
+                (currentProduct["serviceCategory"] = values.serviceCategory),
+                  (currentProduct["location"] = values.location);
+                currentProduct["priceRange"] = values.priceRange;
+                currentProduct["availability"] = values.availability;
+                currentProduct["image"] = values.image;
+
+                // - MAKE DATABASE CALL TO uPDATE THE SERVICES
               }}
             >
               {({ getFieldProps, handleSubmit }) => (
                 <form onSubmit={handleSubmit} className="p-6">
-                  {/* Product Name */}
+                  {/* Service Name */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Product Name
+                      Service Name
                     </label>
                     <textarea
-                      {...getFieldProps("productName")}
+                      {...getFieldProps("serviceTitle")}
                       rows={1}
-                      id="productName"
+                      id="serviceTitle"
                       className="w-full border border-gray-300 rounded-md p-2"
-                      placeholder="Product Name"
+                      placeholder="Service Title"
                     />
                   </div>
 
                   {/* Product Description */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Product Description
+                      Service Description
                     </label>
                     <textarea
-                      {...getFieldProps("productDescription")}
-                      rows={1}
-                      id="productDescription"
+                      {...getFieldProps("serviceDescription")}
+                      rows={3}
+                      id="serviceDescription"
                       className="w-full border border-gray-300 rounded-md p-2"
-                      placeholder="Product Description"
+                      placeholder="Service Description"
                     />
                   </div>
 
                   {/* Product Price */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Product Price
+                      Service Category
                     </label>
                     <textarea
-                      {...getFieldProps("productPrice")}
+                      {...getFieldProps("serviceCategory")}
                       rows={1}
-                      id="productPrice"
+                      id="serviceCategory"
                       className="w-full border border-gray-300 rounded-md p-2"
                       placeholder="Product Price"
+                    />
+                  </div>
+                  {/* Product Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Service Locations
+                    </label>
+                    <textarea
+                      {...getFieldProps("location")}
+                      rows={1}
+                      id="location"
+                      className="w-full border border-gray-300 rounded-md p-2"
+                      placeholder="Service Locations"
+                    />
+                  </div>
+
+                  {/* Product Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Price Ranges
+                    </label>
+                    <textarea
+                      {...getFieldProps("priceRange")}
+                      rows={1}
+                      id="priceRange"
+                      className="w-full border border-gray-300 rounded-md p-2"
+                      placeholder="Price Ranges"
+                    />
+                  </div>
+                  {/* Product Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Service Availability
+                    </label>
+                    <textarea
+                      {...getFieldProps("availability")}
+                      rows={1}
+                      id="availability"
+                      className="w-full border border-gray-300 rounded-md p-2"
+                      placeholder=" Service Availability"
                     />
                   </div>
 
@@ -131,7 +188,7 @@ const ProductsPage = ({
                     </button>
                     <button
                       type="submit"
-                      onClick={closeModal}
+                      onClick={() => handleSubmit}
                       className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                     >
                       Save
@@ -157,50 +214,103 @@ const ProductsPage = ({
                 image: "",
               }}
               onSubmit={(values) => {
-                console.log(values); // Log form values on submit
+                closeModal();
+                let randId = Math.floor(Math.random() * 1000);
+                const newService = {
+                  serviceId: randId,
+                  serviceTitle: values.serviceTitle,
+                  serviceDescription: values.serviceDescription,
+                  serviceCategory: values.serviceCategory,
+                  location: values.location,
+                  priceRange: values.priceRange,
+                  availability: values.availability,
+                  image: values.image,
+                };
+                console.log(newService);
+                // - ADD TO DATABASE
               }}
             >
               {({ getFieldProps, handleSubmit }) => (
                 <form onSubmit={handleSubmit} className="p-6">
-                  {/* Product Name */}
+                  {/* Service Name */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Product Name
+                      Service Name
                     </label>
                     <textarea
-                      {...getFieldProps("productName")}
+                      {...getFieldProps("serviceTitle")}
                       rows={1}
-                      id="productName"
+                      id="serviceTitle"
                       className="w-full border border-gray-300 rounded-md p-2"
-                      placeholder="Product Name"
+                      placeholder="Service Title"
                     />
                   </div>
 
                   {/* Product Description */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Product Description
+                      Service Description
                     </label>
                     <textarea
-                      {...getFieldProps("productDescription")}
-                      rows={1}
-                      id="productDescription"
+                      {...getFieldProps("serviceDescription")}
+                      rows={3}
+                      id="serviceDescription"
                       className="w-full border border-gray-300 rounded-md p-2"
-                      placeholder="Product Description"
+                      placeholder="Service Description"
                     />
                   </div>
 
                   {/* Product Price */}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Product Price
+                      Service Category
                     </label>
                     <textarea
-                      {...getFieldProps("productPrice")}
+                      {...getFieldProps("serviceCategory")}
                       rows={1}
-                      id="productPrice"
+                      id="serviceCategory"
                       className="w-full border border-gray-300 rounded-md p-2"
                       placeholder="Product Price"
+                    />
+                  </div>
+                  {/* Product Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Service Locations
+                    </label>
+                    <textarea
+                      {...getFieldProps("location")}
+                      rows={1}
+                      id="location"
+                      className="w-full border border-gray-300 rounded-md p-2"
+                      placeholder="Service Locations"
+                    />
+                  </div>
+
+                  {/* Product Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Price Ranges
+                    </label>
+                    <textarea
+                      {...getFieldProps("priceRange")}
+                      rows={1}
+                      id="priceRange"
+                      className="w-full border border-gray-300 rounded-md p-2"
+                      placeholder="Price Ranges"
+                    />
+                  </div>
+                  {/* Product Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Service Availability
+                    </label>
+                    <textarea
+                      {...getFieldProps("availability")}
+                      rows={1}
+                      id="availability"
+                      className="w-full border border-gray-300 rounded-md p-2"
+                      placeholder=" Service Availability"
                     />
                   </div>
 
@@ -209,7 +319,7 @@ const ProductsPage = ({
                     <img
                       //onClick={}
                       src={currentProduct?.image}
-                      alt="Product Image"
+                      alt="Our Process"
                       className="rounded-md shadow-sm"
                     />
                   </div>
@@ -225,7 +335,7 @@ const ProductsPage = ({
                     </button>
                     <button
                       type="submit"
-                      onClick={closeModal}
+                      onClick={() => handleSubmit}
                       className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                     >
                       Save
@@ -253,7 +363,7 @@ const ProductsPage = ({
           {productList.map((product: any) => (
             <>
               <div
-                key={product.id}
+                key={product.serviceId}
                 className="border rounded-lg p-4 shadow-lg"
                 onClick={() => {
                   !button ? null : setIsOpen("product");
