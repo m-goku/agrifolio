@@ -24,7 +24,7 @@ export default function Home({ params }: { params: { name: string } }) {
   const [foundProfile, setFoundProfile] = useState<boolean>(false);
   const [header, setHeader] = useState<any>("Home Page");
 
-  const { globalStore, setGlobalStore } = useProfileStore();
+  const { globalStore, setGlobalStore, setBusinessProfile } = useProfileStore();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -34,6 +34,7 @@ export default function Home({ params }: { params: { name: string } }) {
     const getData = async () => {
       const response = await fetch(`/api/${params.name}`);
       const result = await response.json();
+      console.log(result);
 
       if (result.status === 404) {
         setFoundProfile(false);

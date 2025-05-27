@@ -7,13 +7,13 @@ export interface Value {
 }
 
 export interface Services {
-        serviceTitle: string,
-        serviceDescription: string,
-        serviceCategory: string,
-        location: string,
-        priceRange: string,
-        availability: string,
-        image: string,
+  serviceTitle: string;
+  serviceDescription: string;
+  serviceCategory: string;
+  location: string;
+  priceRange: string;
+  availability: string;
+  image: string;
 }
 
 export interface AboutUs {
@@ -35,7 +35,7 @@ export interface BusinessProfile {
   heroText: string;
   heroDescription: string;
   heroImage: string;
-  values: Value[];
+  keyServices: Value[];
   aboutUs: AboutUs;
   services: Services[];
 }

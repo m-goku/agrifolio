@@ -23,7 +23,7 @@ const Card = ({ params }: { params: { name: string } }) => {
 
   const [header, setHeader] = useState<any>("Home Page");
 
-  const { globalStore, setGlobalStore } = useProfileStore();
+  const { globalStore, setGlobalStore, setBusinessProfile } = useProfileStore();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -48,7 +48,7 @@ const Card = ({ params }: { params: { name: string } }) => {
         return;
       }
       setGlobalStore(result);
-      console.log(result);
+      // setGlobalStore(result);
     };
 
     getData();
@@ -56,7 +56,7 @@ const Card = ({ params }: { params: { name: string } }) => {
 
   useEffect(() => {
     if (globalStore) {
-      //console.log(globalStore);
+      // console.log(globalStore);
       setProfile(globalStore);
       setLoading(false);
       setFoundProfile(true);
