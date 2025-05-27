@@ -5,24 +5,15 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import MultiSelect from "@/app/components/MultiSelect";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import ImageUpload from "@/app/components/ImageUpload";
-import { useBusinessContext } from "@/app/context/BusinessContext";
-
-
-
-
-
-
 
 const AgribusinessForm = () => {
-
   //GETTING GLOBAL STATE VALUES
-  const { state, dispatch } = useBusinessContext();
+
   //console.log(state)
 
-
-  const router = useRouter()
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -48,25 +39,7 @@ const AgribusinessForm = () => {
       // city: Yup.string().required("City is required"),
     }),
 
-    onSubmit: (values) => {
-
-
-      //UPDATING GLOBAL STATE
-      const updatedProfile = {
-        name: values.name,
-        historyAndMission: values.historyAndMission,
-        valuesDetails: values.valuesDetails,
-        businessTypesDetails: values.businessTypesDetails,
-        sustainabilityDetails: values.sustainabilityDetails,
-        expertiseDetails: values.expertiseDetails
-      }
-      dispatch({ type: 'SET_BUSINESS_PROFILE', payload: updatedProfile });
-
-      //console.log(values)
-      router.push('/profile/contact',)
-    },
-
-
+    onSubmit: (values) => {},
   });
 
   return (
@@ -89,7 +62,6 @@ const AgribusinessForm = () => {
           placeholder="Enter Your Business Name "
         />
       </div>
-
 
       {/* Agribusiness  Details*/}
       <div className="mb-4">
@@ -118,7 +90,6 @@ const AgribusinessForm = () => {
           placeholder="Enter history and mission"
         />
       </div>
-
 
       {/* Values */}
       <div className="mb-4">
